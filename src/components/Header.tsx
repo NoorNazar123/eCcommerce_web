@@ -5,7 +5,7 @@ import { ModeToggle } from './ModeToggle';
 
 const Header = () => {
   return (
-    <div className="flex justify-between items-center px-6 py-4 bg-gray-900 text-white shadow-lg">
+    <div className="flex justify-between items-center px-6 py-4  shadow-lg">
       <div className="space-x-6">
         <Link href="/" className="hover:text-gray-300 transition">
           Home
@@ -15,8 +15,8 @@ const Header = () => {
         </Link>
         <Link href="/profile">Profile</Link>
       </div>
-      <SignInButton />
-      <div>
+      <div className="flex gap-4">
+        <SignInButton />
         <ModeToggle />
       </div>
     </div>
