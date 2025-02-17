@@ -3,7 +3,7 @@ import Link from 'next/link';
 import SignInButton from './SignInButton';
 import { ModeToggle } from './ModeToggle';
 
-const Navbar = () => {
+const Header = () => {
   return (
     <div className="flex justify-between items-center px-6 py-4 bg-gray-900 text-white shadow-lg">
       <div className="space-x-6">
@@ -23,4 +23,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Header;
