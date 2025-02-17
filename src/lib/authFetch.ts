@@ -1,5 +1,5 @@
-import { refreshToken } from "./auth";
-import { getSession } from "./session";
+import { refreshToken } from './auth';
+import { getSession } from './session';
 
 export interface FetchOptions extends RequestInit {
   headers?: Record<string, string>;
@@ -7,7 +7,7 @@ export interface FetchOptions extends RequestInit {
 
 export const authFetch = async (
   url: string | URL,
-  options: FetchOptions = {}
+  options: FetchOptions = {},
 ) => {
   const session = await getSession();
 
@@ -19,12 +19,12 @@ export const authFetch = async (
   console.log({
     StaTTTTTTTTTTTTTTTTTTTTUS: response.status,
   });
-  console.log("session0012outer", session);
+  console.log('session0012outer', session);
   if (response.status === 401) {
-    if (!session?.refreshToken) throw new Error("refresh token not found!");
+    if (!session?.refreshToken) throw new Error('refresh token not found!');
 
     const newAccessToken = await refreshToken(session.refreshToken);
-    console.log("session0012", session, newAccessToken);
+    console.log('session0012', session, newAccessToken);
     if (newAccessToken) {
       options = {
         ...options,
