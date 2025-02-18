@@ -1,6 +1,6 @@
 'use client';
 
-import LoadingSkeleton from '@/components/LoadingSkeleton';
+import Loading from '@/app/loading';
 import { getSession } from '@/lib/session';
 import { Role } from '@/types/type';
 import { redirect } from 'next/navigation';
@@ -34,7 +34,7 @@ const AdminDashboard = () => {
   }, []);
 
   if (loading) {
-    return <LoadingSkeleton size="large" color="green" />;
+    return <Loading />;
   }
 
   if (!isAdmin) {
