@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import SubmitForm from '../../../components/SubmitButton';
+import SubmitForm from '../../../../components/SubmitButton';
 import { signUp } from '@/lib/auth';
 import { FormState } from '@/types/type';
 
