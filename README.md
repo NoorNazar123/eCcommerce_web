@@ -37,6 +37,7 @@ Docker – Containerization for
 │ │ │ ├── login.tsx # Login page
 │ │ │ ├── signup.tsx # Signup page
 │ │ │ ├── forgot.tsx # Forgot Password page
+|\_\_ verfity.tsx #verfied real user
 │ │ ├── 📂 products/ # Product Pages (Listing, Details, Categories)
 │ │ │ ├── index.tsx # Product Listing Page (All Products)
 │ │ │ ├── [id].tsx # Dynamic Product Detail Page
