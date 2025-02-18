@@ -25,74 +25,100 @@ Docker – Containerization for
 📁 Folder Structure
 
 📦 src/
-│── app/ # Next.js App Router (Page-Based Routing)
-│ ├── layout.tsx # Root Layout (Navbar, Footer, Cart, etc.)
-│ ├── page.tsx # Homepage `/` (Featured Products, Banners, etc.)
-│ ├── api/ # API Routes (Calling NestJS Backend)
-│ │ ├── auth/ # Authentication API Calls (Login, Signup)
-│ │ ├── products/ # Product API Calls (Fetch Product Data)
-│ │ ├── orders/ # Order API Calls (Place Order, Order History)
-│ │ ├── cart/ # Cart API Calls (Add to Cart, Remove from Cart)
-│ │ ├── checkout/ # Checkout API (Payment, Shipping)
-│ ├── auth/ # Authentication Pages (Login, Signup, Profile)
-│ │ ├── login.tsx # Login page
-│ │ ├── signup.tsx # Signup page
-│ ├── dashboard/ # Admin Dashboard (Manage Orders, Products, Users)
-│ │ ├── index.tsx # Dashboard Overview
-│ │ ├── orders.tsx # Manage Orders
-│ │ ├── products.tsx # Manage Products
-│ ├── products/ # Product Pages (Listing, Details, Categories)
-│ │ ├── index.tsx # Product Listing Page
-│ │ ├── [id].tsx # Dynamic Product Detail Page
-│ ├── checkout/ # Checkout & Payments (Review, Address, Payment)
-│ │ ├── index.tsx # Checkout page
-│ │ ├── payment.tsx # Payment Gateway Integration
-│ ├── cart/ # Shopping Cart Page (View Cart, Update Quantities)
-│ │ ├── index.tsx # Cart Overview Page
-│ │ ├── summary.tsx # Cart Summary (Price Breakdown, Apply Coupons)
-│── components/ # Reusable UI Components
-│ ├── ui/ # UI-Only Components (Buttons, Inputs, etc.)
+│── 📂 app/ # Next.js App Router (Page-Based Routing)
+│ ├── 📂 dashboard/ # Admin Dashboard (Manage Orders, Products, Users)
+│ │ ├── index.tsx # Dashboard Overview (Admin Home)
+│ │ ├── orders.tsx # Manage Orders (View, Edit Orders)
+│ │ ├── products.tsx # Manage Products (CRUD Operations on Products)
+│ │ ├── users.tsx # Manage Users (User Profiles, Permissions)
+│ │ ├── reports.tsx # View Sales Reports, Analytics
+│ ├── 📂 root/ # User-Facing Pages (Auth, Products, Profile, Cart, Checkout)
+│ │ ├── 📂 auth/ # Authentication Pages (Login, Signup, Forgot Password)
+│ │ │ ├── login.tsx # Login page
+│ │ │ ├── signup.tsx # Signup page
+│ │ │ ├── forgot.tsx # Forgot Password page
+│ │ ├── 📂 products/ # Product Pages (Listing, Details, Categories)
+│ │ │ ├── index.tsx # Product Listing Page (All Products)
+│ │ │ ├── [id].tsx # Dynamic Product Detail Page
+│ │ │ ├── category/[slug].tsx # Product Categories Page (e.g., Electronics, Clothing)
+│ │ ├── 📂 cart/ # Cart Pages (View Cart, Update Quantities)
+│ │ │ ├── index.tsx # Cart Overview Page
+│ │ │ ├── summary.tsx # Cart Summary (Price Breakdown, Apply Coupons)
+│ │ ├── 📂 checkout/ # Checkout Pages (Shipping, Payment)
+│ │ │ ├── index.tsx # Checkout page (Shipping details)
+│ │ │ ├── shipping.tsx # Shipping Address Form
+│ │ │ ├── payment.tsx # Payment Gateway Integration
+│ │ ├── 📂 profile/ # User Profile Pages (View and Edit Profile)
+│ │ │ ├── index.tsx # View Profile (User Information)
+│ │ │ ├── edit.tsx # Edit Profile Information (Name, Email, Password)
+│ │ ├── 📂 orders/ # User's Order History and Details
+│ │ │ ├── index.tsx # Order History Page (Past Orders)
+│ │ │ ├── [orderId].tsx # Order Details Page
+│ ├── 📂 api/ # API Routes (Calling NestJS Backend)
+│ │ ├── 📂 auth/ # Authentication API Calls (Login, Signup, Forgot Password)
+│ │ │ ├── login.ts # Login API
+│ │ │ ├── signup.ts # Signup API
+│ │ │ ├── forgot.ts # Forgot Password API
+│ │ ├── 📂 products/ # Product API Calls (CRUD for Products)
+│ │ │ ├── index.ts # Fetch Products (Listing) <-- Calls NestJS API to fetch products
+│ │ │ ├── [id].ts # Fetch Product by ID (Dynamic) <-- Calls NestJS API to fetch single product
+│ │ ├── 📂 orders/ # Order API Calls (Place Order, Order History)
+│ │ │ ├── create.ts # Create Order API <-- Interacts with NestJS to place orders
+│ │ │ ├── history.ts # Order History API <-- Fetches user order history from NestJS
+│ │ ├── 📂 cart/ # Cart API Calls (Add to Cart, Remove from Cart, Update Quantities)
+│ │ ├── 📂 checkout/ # Checkout API (Payment, Shipping, etc.)
+│ │ ├── 📂 payments/ # Payment API (Integrating with Payment Gateways)
+│── 📂 components/ # Reusable UI Components
+│ ├── 📂 ui/ # UI-Only Components (Buttons, Inputs, etc.)
 │ │ ├── Button.tsx # Reusable button component
 │ │ ├── Input.tsx # Reusable input component
-│ ├── custom/ # Feature-Specific Custom Components
+│ │ ├── Select.tsx # Dropdown component for selecting options
+│ ├── 📂 custom/ # Feature-Specific Custom Components (ProductCard, CartItem)
 │ │ ├── ProductCard.tsx # Product display card component
 │ │ ├── CartItem.tsx # Cart item display component
-│ │ ├── ProductFilter.tsx # Filters for products (Category, Price, etc.)
-│ ├── module/ # Larger Functional Modules (ProductList, CartSummary)
+│ │ ├── ProductFilter.tsx # Filters for products (Category, Price, Rating, etc.)
+│ ├── 📂 module/ # Larger Functional Modules (ProductList, CartSummary)
 │ │ ├── ProductList.tsx # Displays list of products (with filter options)
 │ │ ├── CartSummary.tsx # Shows cart summary, total price, and checkout button
 │ │ ├── OrderHistory.tsx # Displays the history of customer orders
 │ │ ├── ProductSearch.tsx # A search component for products
-│── hooks/ # Custom React Hooks
+│ ├── 📂 layout/ # Layouts for pages (Navbar, Sidebar, Footer, etc.)
+│ │ ├── MainLayout.tsx # Main layout for public-facing pages (Navbar, Footer, etc.)
+│ │ ├── DashboardLayout.tsx # Layout for the Admin Dashboard (Sidebar, Navbar)
+│── 📂 hooks/ # Custom React Hooks (useCart, useAuth, useProducts, etc.)
 │ ├── useCart.ts # Custom hook for cart state management
 │ ├── useProducts.ts # Custom hook to fetch products
-│ ├── useAuth.ts # Custom hook for authentication
-│── lib/ # Utility & Helper Functions
+│ ├── useAuth.ts # Custom hook for authentication logic
+│ ├── useOrderHistory.ts # Custom hook for fetching user's order history
+│── 📂 lib/ # Utility & Helper Functions
 │ ├── calculateTotal.js # Helper function to calculate total cart value
 │ ├── formatCurrency.js # Helper function to format price in currency
-│ ├── fetchData.js # Utility for fetching data from API
-│── store/ # State Management (ReduxToolkit)
+│ ├── fetchData.js # Utility for fetching data from API (calls NestJS API)
+│ ├── validateEmail.js # Helper function to validate email format
+│── 📂 store/ # State Management (ReduxToolkit)
 │ ├── cartSlice.ts # Redux slice for managing cart state
 │ ├── productSlice.ts # Redux slice for managing product data
 │ ├── orderSlice.ts # Redux slice for managing orders
-│── public/ # Static Assets (Images, Icons)
+│ ├── authSlice.ts # Redux slice for managing user authentication
+│ ├── checkoutSlice.ts # Redux slice for managing checkout process
+│── 📂 public/ # Static Assets (Images, Icons)
 │ ├── images/ # Product images, banners, etc.
 │ ├── icons/ # Icons for UI (Cart, Heart, etc.)
-│── styles/ # Global Styles (Tailwind, SCSS)
+│── 📂 styles/ # Global Styles (Tailwind, SCSS)
 │ ├── tailwind.config.js # Tailwind configuration file
 │ ├── global.scss # Global styles (e.g., typography, colors)
 │ ├── components.scss # Component-specific SCSS (e.g., buttons, cards)
-│── config/ # Config Files (API Keys, Env)
+│── 📂 config/ # Config Files (API Keys, Env)
 │ ├── env.js # Environment variables (e.g., API keys, secret keys)
-│ ├── config.js # App-specific configurations
-│── tests/ # Unit & Integration Tests
+│ ├── config.js # App-specific configurations (Stripe, PayPal API Keys, etc.)
+│── 📂 tests/ # Unit & Integration Tests
 │ ├── product.test.js # Tests for product API and UI components
 │ ├── cart.test.js # Tests for cart API and UI components
 │ ├── checkout.test.js # Tests for checkout and payment flow
 │ ├── cypress/ # End-to-End Testing with Cypress
 │ │ ├── cart.spec.js # Test cart functionality in the UI
 │ │ ├── checkout.spec.js # Test checkout and payment functionality
-│── documentation/ # Project Documentation
+│── 📂 documentation/ # Project Documentation
 │ ├── setup.md # Instructions on setting up the project
 │ ├── architecture.md # Overview of the app architecture
 │ ├── api.md # API Documentation (e.g., API calls, endpoints)
