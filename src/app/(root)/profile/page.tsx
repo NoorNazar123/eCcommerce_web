@@ -25,7 +25,7 @@ const ProfilePage = () => {
   }, []);
 
   if (loading) {
-    return <Loading />;
+    return <Loading size="w-[50px] h-[50px]" />;
   }
 
   return (
