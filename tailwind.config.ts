@@ -49,6 +49,7 @@ export default {
         serif: ['Merriweather', 'ui-serif', 'serif'],
         mono: ['Fira Code', 'monospace'],
         sylvaincode: ['Arial', 'sans-serif'],
+        manrope: ['var(--font-manrope)', 'sans-serif'],
       },
       fontSize: {
         xs: ['0.75rem', { lineHeight: '1.25' }],
