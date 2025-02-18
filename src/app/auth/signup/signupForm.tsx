@@ -23,7 +23,7 @@ const SignupForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-4 bg-white p-6 rounded-lg shadow-md w-96"
+      className="space-y-4 bg-white dark:bg-[#0000] p-6 rounded-lg shadow-md w-96"
     >
       {state?.error?.message && (
         <p className="text-sm bg-red-500 text-white p-2 rounded">

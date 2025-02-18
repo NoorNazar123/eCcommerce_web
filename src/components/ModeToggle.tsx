@@ -8,6 +8,15 @@ import { Button } from '@/components/ui/button';
 
 export function ModeToggle() {
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+
+  // Ensure the component is mounted on the client-side
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // If the component is not mounted yet, prevent rendering
+  if (!mounted) return null;
 
   // Toggle theme between light and dark
   const toggleTheme = () => {

@@ -9,10 +9,7 @@ import { logIn } from '@/lib/auth';
 const LoginForm = () => {
   const [state, action] = React.useActionState(logIn, undefined);
   return (
-    <form
-      action={action}
-      className="space-y-4 bg-white p-6 rounded-lg shadow-md w-96"
-    >
+    <form action={action} className="space-y-4  p-6 rounded-lg shadow-md w-96">
       {/* Email Input */}
       {state?.error?.message && (
         <p className="text-sm bg-red-500 text-white p-2 rounded">
