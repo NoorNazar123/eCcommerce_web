@@ -1,5 +1,6 @@
 'use client';
 
+import LoadingSkeleton from '@/components/LoadingSkeleton';
 import { getSession } from '@/lib/session';
 import { Role } from '@/types/type';
 import { redirect } from 'next/navigation';
@@ -33,11 +34,7 @@ const AdminDashboard = () => {
   }, []);
 
   if (loading) {
-    return (
-      <div className="flex h-screen items-center justify-center">
-        Loading...
-      </div>
-    );
+    return <LoadingSkeleton size="large" color="green" />;
   }
 
   if (!isAdmin) {

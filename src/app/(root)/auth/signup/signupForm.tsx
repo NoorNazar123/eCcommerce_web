@@ -116,7 +116,7 @@ const SignupForm = () => {
 
       {/* Google Sign-in Button */}
       <Link
-        href="/"
+        href={`http://localhost:8080/auth/google/login`}
         className="flex items-center tracking-wide justify-center gap-2 font-medium text-xs sm:text-sm bg-white text-gray-500 py-2 w-full rounded-md border-[1px] border-gray-200 hover:bg-gray-100 transition disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <FcGoogle className="text-xl" />
