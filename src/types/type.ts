@@ -51,3 +51,17 @@ export enum Role {
   EDITOR = 'EDITOR',
   USER = 'USER',
 }
+
+export interface Products {
+  _id?: string;
+  title: string;
+  description: string;
+  videoUrl: string;
+  thumbnailUrl: string;
+  controls?: boolean;
+  transformation?: {
+    height: number;
+    width: number;
+    quality?: number;
+  };
+}
