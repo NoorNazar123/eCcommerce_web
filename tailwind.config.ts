@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import plugin from 'tailwindcss/plugin';
 
 export default {
   darkMode: ['class'],
@@ -46,9 +47,7 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        serif: ['Merriweather', 'ui-serif', 'serif'],
         mono: ['Fira Code', 'monospace'],
-        sylvaincode: ['Arial', 'sans-serif'],
         manrope: ['var(--font-manrope)', 'sans-serif'],
       },
       fontSize: {
@@ -75,7 +74,7 @@ export default {
         semibold: '600',
         bold: '700',
         extrabold: '800',
-        black: '900',
+        boldlarge: '900',
       },
       borderRadius: {
         none: '0',
@@ -125,42 +124,172 @@ export default {
         80: '20rem',
         96: '24rem',
       },
-      // Custom Heading Styles
-      typography: (theme: (arg0: string) => any) => ({
-        DEFAULT: {
-          css: {
-            h1: {
-              fontSize: theme('fontSize.4xl'),
-              fontWeight: theme('fontWeight.bold'),
-              lineHeight: theme('lineHeight.tight'),
-              color: theme('colors.foreground'),
-            },
-            h2: {
-              fontSize: theme('fontSize.3xl'),
-              fontWeight: theme('fontWeight.bold'),
-              lineHeight: theme('lineHeight.tight'),
-              color: theme('colors.foreground'),
-            },
-            h3: {
-              fontSize: theme('fontSize.2xl'),
-              fontWeight: theme('fontWeight.bold'),
-              lineHeight: theme('lineHeight.tight'),
-              color: theme('colors.foreground'),
-            },
-            h4: {
-              fontSize: theme('fontSize.xl'),
-              fontWeight: theme('fontWeight.bold'),
-              lineHeight: theme('lineHeight.tight'),
-              color: theme('colors.foreground'),
-            },
-          },
-        },
-      }),
     },
   },
   plugins: [
     require('tailwindcss-animate'),
-    require('@tailwindcss/typography'), // Typography plugin
-    require('@tailwindcss/forms'), // Forms plugin
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
+    plugin(({ addComponents }) => {
+      const components: Record<string, Record<string, any>> = {
+        '.layout-container': {
+          width: '100%',
+          margin: '0 auto',
+
+          '@screen md': {
+            width: '90%',
+            maxWidth: '1700px',
+            margin: '0 auto',
+          },
+          padding: '6rem 1rem',
+        },
+        '.heading-text': {
+          fontSize: '4rem',
+          fontWeight: '600',
+          lineHeight: '45px',
+
+          '@screen md': {
+            fontSize: '7rem',
+            fontWeight: '900',
+            lineHeight: '45px',
+          },
+        },
+        '.heading-h2': {
+          fontSize: '3rem',
+          fontWeight: '600',
+          lineHeight: '45px',
+
+          '@screen md': {
+            fontSize: '5rem',
+            fontWeight: '800',
+            lineHeight: '45px',
+          },
+        },
+        '.para-text': {
+          fontSize: '16px',
+          fontWeight: '500',
+          lineHeight: '27px',
+        },
+        '.btn': {
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontWeight: '600',
+          padding: '12px 24px',
+          borderRadius: '8px',
+          transition: 'all 0.3s ease-in-out',
+          border: '1px solid transparent',
+          outline: 'none',
+          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+          cursor: 'pointer',
+
+          '&:focus': {
+            outline: 'none',
+            boxShadow: '0 0 0 2px #d1d5db',
+          },
+        },
+
+        /* Primary Button */
+        '.btn-primary': {
+          backgroundColor: '#2563eb',
+          color: '#ffffff',
+          '&:hover': {
+            backgroundColor: '#1e4bb8',
+            boxShadow: '0 2px 5px rgba(0, 0, 0, 0.15)',
+          },
+          '&:focus': {
+            boxShadow: '0 0 0 2px #3b82f6',
+          },
+        },
+        '.dark .btns-primary': {
+          backgroundColor: '#3b82f6',
+          '&:hover': {
+            backgroundColor: '#1e40af',
+          },
+        },
+
+        /* Secondary Button */
+        '.btn-secondary': {
+          backgroundColor: '#f3f4f6',
+          color: '#374151',
+          '&:hover': {
+            backgroundColor: '#e5e7eb',
+          },
+          '&:focus': {
+            boxShadow: '0 0 0 2px #d1d5db',
+          },
+        },
+        '.dark .btn-secondary': {
+          backgroundColor: '#374151',
+          color: '#f9fafb',
+          '&:hover': {
+            backgroundColor: '#4b5563',
+          },
+        },
+
+        /* Outline Button */
+        '.btn-outline': {
+          backgroundColor: 'transparent',
+          border: '1px solid #d1d5db',
+          color: '#374151',
+          '&:hover': {
+            backgroundColor: '#f9fafb',
+            boxShadow: '0 2px 5px rgba(0, 0, 0, 0.15)',
+          },
+          '&:focus': {
+            boxShadow: '0 0 0 2px #d1d5db',
+          },
+        },
+        '.dark .btn-outline': {
+          border: '1px solid #4b5563',
+          color: '#f9fafb',
+          '&:hover': {
+            backgroundColor: '#1f2937',
+          },
+        },
+
+        /* Ghost Button */
+        '.btn-ghost': {
+          backgroundColor: 'transparent',
+          color: '#374151',
+          '&:hover': {
+            backgroundColor: '#f3f4f6',
+            boxShadow: '0 2px 5px rgba(0, 0, 0, 0.15)',
+          },
+          '&:focus': {
+            boxShadow: '0 0 0 2px #d1d5db',
+          },
+        },
+        '.dark .btn-ghost': {
+          color: '#f9fafb',
+          '&:hover': {
+            backgroundColor: '#1f2937',
+          },
+        },
+
+        /* Danger Button */
+        '.btn-danger': {
+          backgroundColor: '#dc2626',
+          color: '#ffffff',
+          '&:hover': {
+            backgroundColor: '#b91c1c',
+            boxShadow: '0 2px 5px rgba(0, 0, 0, 0.15)',
+          },
+          '&:focus': {
+            boxShadow: '0 0 0 2px #ef4444',
+          },
+        },
+        '.dark .btn-danger': {
+          backgroundColor: '#ef4444',
+          '&:hover': {
+            backgroundColor: '#b91c1c',
+          },
+        },
+      };
+      addComponents(components);
+    }),
   ],
 } satisfies Config;
+function theme(arg0: string) {
+  throw new Error('Function not implemented.');
+}

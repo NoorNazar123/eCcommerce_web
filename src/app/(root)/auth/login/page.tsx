@@ -14,7 +14,7 @@ const Login = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="flex w-full max-w-5xl bg-white rounded-2xl overflow-hidden border  shadow-lg"
+        className="flex w-full max-w-5xl  rounded-2xl overflow-hidden border  shadow-lg"
       >
         {/* Image Section (Hidden on Small Screens) */}
         <motion.div

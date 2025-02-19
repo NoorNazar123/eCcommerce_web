@@ -18,7 +18,7 @@ const AddToCart = () => {
     dispatch(add(productId));
   };
   return (
-    <div>
+    <div className="font-mono font-semibold">
       <p>Testing reduxTookit Store</p>
       {/* Passing a valid product object and we should better to make it saperate component. here we are making all component client. so make it saperate component */}
       <button onClick={() => handleAddToCart(products[0])}>Add to Cart</button>

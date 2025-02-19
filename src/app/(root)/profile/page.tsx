@@ -29,12 +29,12 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8">
+    <div className="min-h-screen py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">Profile</h1>
 
         {error ? (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md">
+          <div className=" border border-red-400 text-red-700 px-4 py-3 rounded-md">
             <p>Error: {error}</p>
             <p>Only admins can access this page.</p>
           </div>
