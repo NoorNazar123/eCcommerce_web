@@ -1,5 +1,6 @@
 import { getSession } from '@/lib/session';
 import Link from 'next/link';
+import { Button } from './ui/button';
 
 const SignInButton = async () => {
   const session = await getSession();
@@ -9,13 +10,13 @@ const SignInButton = async () => {
       <div className="flex items-center space-x-4">
         <Link
           href="/auth/login"
-          className="px-4 py-2 btn btn-secondary transition rounded-lg shadow-md"
+          className=" btn btn-secondary shadow-md boder border-[#0000001a] "
         >
           Login
         </Link>
         <Link
           href="/auth/signup"
-          className="px-4 py-2 btn btn-outline transition rounded-lg shadow-md"
+          className="btn btn-outline transition rounded-lg shadow-md"
         >
           Signup
         </Link>
@@ -31,9 +32,9 @@ const SignInButton = async () => {
       </div>
 
       <form action="/api/auth/signout" method="GET">
-        <button type="submit" className="btn btn-danger">
+        <Button type="submit" className="btn btn-danger ">
           Logout
-        </button>
+        </Button>
       </form>
     </div>
   );

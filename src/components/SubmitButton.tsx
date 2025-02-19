@@ -13,13 +13,13 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ children }) => {
   const { pending } = useFormStatus();
 
   return (
-    <Button
+    <button
       type="submit"
       disabled={pending}
-      className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+      className="w-full btn btn-outline para bg-[#fdebd0] dark:bg-transparent transition rounded-lg shadow-md py-[20px] mt-8"
     >
       {pending ? <Loading size="w-[20px] h-[20px]" /> : children}
-    </Button>
+    </button>
   );
 };
 

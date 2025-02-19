@@ -22,111 +22,272 @@ const SignupForm = () => {
     }
   };
 
+  // Define form fields dynamically
+  const formFields = [
+    {
+      id: 'username',
+      name: 'username',
+      type: 'text',
+      label: 'Username',
+      placeholder: 'Enter your username',
+      errorKey: 'username', // Key for error messages
+    },
+    {
+      id: 'email',
+      name: 'email',
+      type: 'email',
+      label: 'Email Address',
+      placeholder: 'Enter your email',
+      errorKey: 'email', // Key for error messages
+    },
+    {
+      id: 'password',
+      name: 'password',
+      type: 'password',
+      label: 'Password',
+      placeholder: 'Enter your password',
+      errorKey: 'password', // Key for error messages
+    },
+  ];
+
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="space-y-4 h-auto bg-white w-full max-w-md mx-auto p-9 rounded-lg border-[1px] border-gray-200"
-    >
+    <form onSubmit={handleSubmit}>
       {/* Error Message */}
       {state?.error?.message && (
-        <p className="text-xs sm:text-sm bg-red-500 text-white p-2 rounded">
+        <p className="para bg-red-500 text-white px-2  rounded">
           {state.error.message}
         </p>
       )}
 
-      {/* Username Input */}
-      <div>
-        <Label
-          htmlFor="username"
-          className="block text-sm font-medium text-gray-800"
-        >
-          Username
-        </Label>
-        <Input
-          id="username"
-          name="username"
-          placeholder="Enter your username"
-          className="w-full mt-1 px-2 py-5 border border-gray-200 rounded-md focus:ring-blue-500 focus:border-blue-500"
-        />
-        {state?.error?.username && (
-          <p className="text-xs sm:text-sm text-red-500">
-            {state.error.username}
-          </p>
-        )}
-      </div>
-
-      {/* Email Input */}
-      <div>
-        <Label
-          htmlFor="email"
-          className="block text-sm font-medium text-gray-800"
-        >
-          Email
-        </Label>
-        <Input
-          id="email"
-          name="email"
-          type="email"
-          placeholder="Enter your email"
-          className="w-full mt-1 px-2 py-5 border border-gray-200 rounded-md focus:ring-blue-500 focus:border-blue-500"
-        />
-        {state?.error?.email && (
-          <p className="text-xs sm:text-sm text-red-500">{state.error.email}</p>
-        )}
-      </div>
-
-      {/* Password Input */}
-      <div>
-        <Label
-          htmlFor="password"
-          className="block text-sm font-medium text-gray-800"
-        >
-          Password
-        </Label>
-        <Input
-          id="password"
-          name="password"
-          type="password"
-          placeholder="Enter your password"
-          className="w-full mt-1 px-2 py-5 border border-gray-200 rounded-md focus:ring-blue-500 focus:border-blue-500"
-        />
-        {state?.error?.password && (
-          <div className="text-xs sm:text-sm text-red-500">
-            <p>Password must be:</p>
-            <ul className="list-disc pl-5">
-              {state.error.password.map((error: string, index: number) => (
-                <li key={index}>{error}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
+      {/* Dynamically Render Form Fields */}
+      {formFields.map(({ id, name, type, label, placeholder, errorKey }) => (
+        <div key={id} className="py-[8px]">
+          <Label htmlFor={id} className="para font-normal text-[16px]">
+            {label}
+          </Label>
+          <Input
+            id={id}
+            name={name}
+            type={type}
+            placeholder={placeholder}
+            className=""
+          />
+          {/* Render error message if exists */}
+          {state?.error && (
+            <p className="para text-red-500">
+              {/* Use type assertion to access error message dynamically */}
+              {state.error[errorKey as keyof typeof state.error]}
+            </p>
+          )}
+        </div>
+      ))}
 
       {/* Submit Button */}
       <SubmitForm>Sign Up</SubmitForm>
-
-      {/* Divider Line with OR */}
-      <div className="flex items-center my-4">
-        <div className="flex-grow h-px bg-gray-300"></div>
-        <span className="px-3 text-xs sm:text-sm text-gray-500 font-medium">
-          OR
-        </span>
-        <div className="flex-grow h-px bg-gray-300"></div>
-      </div>
-
-      {/* Google Sign-in Button */}
-      <Link
-        href={`http://localhost:8080/auth/google/login`}
-        className="flex items-center tracking-wide justify-center gap-2 font-medium text-xs sm:text-sm bg-white text-gray-500 py-2 w-full rounded-md border-[1px] border-gray-200 hover:bg-gray-100 transition disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        <FcGoogle className="text-xl" />
-        Continue With Google
-      </Link>
     </form>
   );
 };
 
 export default SignupForm;
+
+//'use client';
+
+// import React, { useState } from 'react';
+// import { Label } from '@/components/ui/label';
+// import { Input } from '@/components/ui/input';
+// import SubmitForm from '@/components/SubmitButton';
+// import { signUp } from '@/lib/auth';
+// import { FormState } from '@/types/type';
+// import { FcGoogle } from 'react-icons/fc';
+// import Link from 'next/link';
+
+// const SignupForm = () => {
+//   const [state, setState] = useState<FormState | undefined>(undefined);
+
+//   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+//     event.preventDefault();
+//     const formData = new FormData(event.currentTarget);
+//     const result = await signUp(null, formData);
+
+//     if (result) {
+//       setState(result);
+//     }
+//   };
+
+//   const formFields = [
+//     {
+//       id: 'username',
+//       name: 'username',
+//       type: 'text',
+//       label: 'Username',
+//       placeholder: 'Enter your username',
+//       errorKey: 'username',
+//     },
+//     {
+//       id: 'email',
+//       name: 'email',
+//       type: 'email',
+//       label: 'Email',
+//       placeholder: 'Enter your email',
+//       errorKey: 'email',
+//     },
+//     {
+//       idf: 1,
+//       id: 'password',
+//       name: 'password',
+//       type: 'password',
+//       label: 'Password',
+//       placeholder: 'Enter your password',
+//       errorKey: 'password',
+//     },
+//   ];
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       {/* Error Message */}
+//       {state?.error?.message && <p className="para">{state.error.message}</p>}
+
+//       {/* Dynamically Render Form Fields */}
+//       {formFields.map(({ id, name, type, label, placeholder, errorKey }) => (
+//         <div key={id}>
+//           <Label
+//             htmlFor={id}
+//             className="block text-sm font-medium text-gray-800"
+//           >
+//             {label}
+//           </Label>
+//           <Input
+//             id={id}
+//             name={name}
+//             type={type}
+//             placeholder={placeholder}
+//             className="w-full mt-1 px-2 py-5 border border-gray-200 rounded-md focus:ring-blue-500 focus:border-blue-500"
+//           />
+//           {state?.error?.[errorKey] && (
+//             <p className="text-xs sm:text-sm text-red-500">
+//               {state.error[errorKey]}
+//             </p>
+//           )}
+//         </div>
+//       ))}
+
+//       {/* Submit Button */}
+//       <SubmitForm>Sign Up</SubmitForm>
+
+//       {/* Divider Line with OR */}
+//       <div className="flex items-center my-4">
+//         <div className="flex-grow h-px bg-gray-300"></div>
+//         <span className="px-3 text-xs sm:text-sm text-gray-500 font-medium">
+//           OR
+//         </span>
+//         <div className="flex-grow h-px bg-gray-300"></div>
+//       </div>
+
+//       {/* Google Sign-in Button */}
+//       <Link
+//         href={`http://localhost:8080/auth/google/login`}
+//         className="flex items-center tracking-wide justify-center gap-2 font-medium text-xs sm:text-sm bg-white text-gray-500 py-2 w-full rounded-md border-[1px] border-gray-200 hover:bg-gray-100 transition disabled:opacity-50 disabled:cursor-not-allowed"
+//       >
+//         <FcGoogle className="text-xl" />
+//         Continue With Google
+//       </Link>
+//     </form>
+//   );
+
+// };
+
+// export default SignupForm;
+
+// <form onSubmit={handleSubmit}>
+//   {/* Error Message */}
+//   {state?.error?.message && <p className=" para">{state.error.message}</p>}
+
+//   {/* Username Input */}
+//   <div>
+//     <Label htmlFor="username" className="para">
+//       Username
+//     </Label>
+//     <Input
+//       id="username"
+//       name="username"
+//       placeholder="Enter your username"
+//       className="w-full mt-1 px-2 py-5 border border-gray-200 rounded-md focus:ring-blue-500 focus:border-blue-500"
+//     />
+//     {state?.error?.username && (
+//       <p className="text-xs sm:text-sm text-red-500">
+//         {state.error.username}
+//       </p>
+//     )}
+//   </div>
+
+//   {/* Email Input */}
+//   <div>
+//     <Label
+//       htmlFor="email"
+//       className="block text-sm font-medium text-gray-800"
+//     >
+//       Email
+//     </Label>
+//     <Input
+//       id="email"
+//       name="email"
+//       type="email"
+//       placeholder="Enter your email"
+//       className="w-full mt-1 px-2 py-5 border border-gray-200 rounded-md focus:ring-blue-500 focus:border-blue-500"
+//     />
+//     {state?.error?.email && (
+//       <p className="text-xs sm:text-sm text-red-500">{state.error.email}</p>
+//     )}
+//   </div>
+
+//   {/* Password Input */}
+//   <div>
+//     <Label
+//       htmlFor="password"
+//       className="block text-sm font-medium text-gray-800"
+//     >
+//       Password
+//     </Label>
+//     <Input
+//       id="password"
+//       name="password"
+//       type="password"
+//       placeholder="Enter your password"
+//       className="w-full mt-1 px-2 py-5 border border-gray-200 rounded-md focus:ring-blue-500 focus:border-blue-500"
+//     />
+//     {state?.error?.password && (
+//       <div className="text-xs sm:text-sm text-red-500">
+//         <p>Password must be:</p>
+//         <ul className="list-disc pl-5">
+//           {state.error.password.map((error: string, index: number) => (
+//             <li key={index}>{error}</li>
+//           ))}
+//         </ul>
+//       </div>
+//     )}
+//   </div>
+
+//   {/* Submit Button */}
+//   <SubmitForm>Sign Up</SubmitForm>
+
+//   {/* Divider Line with OR */}
+//   <div className="flex items-center my-4">
+//     <div className="flex-grow h-px bg-gray-300"></div>
+//     <span className="px-3 text-xs sm:text-sm text-gray-500 font-medium">
+//       OR
+//     </span>
+//     <div className="flex-grow h-px bg-gray-300"></div>
+//   </div>
+
+//   {/* Google Sign-in Button */}
+//   <Link
+//     href={`http://localhost:8080/auth/google/login`}
+//     className="flex items-center tracking-wide justify-center gap-2 font-medium text-xs sm:text-sm bg-white text-gray-500 py-2 w-full rounded-md border-[1px] border-gray-200 hover:bg-gray-100 transition disabled:opacity-50 disabled:cursor-not-allowed"
+//   >
+//     <FcGoogle className="text-xl" />
+//     Continue With Google
+//   </Link>
+// </form>
 
 // old code
 

@@ -31,9 +31,10 @@ export type FormState =
         username?: string[];
         email?: string[];
         password?: string[];
-        message?: string; // ✅ Added message inside error object
+        message?: string;
       };
-      message?: string; // ✅ This is also valid, used for success messages
+      message?: string;
+      null: null;
     }
   | undefined;
 

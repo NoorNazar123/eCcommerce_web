@@ -143,39 +143,67 @@ export default {
           },
           padding: '6rem 1rem',
         },
-        '.heading-text': {
+        '.heading-h1': {
           fontSize: '4rem',
           fontWeight: '600',
-          lineHeight: '45px',
+          lineHeight: '1.80rem',
 
           '@screen md': {
-            fontSize: '7rem',
+            fontSize: '6rem',
             fontWeight: '900',
-            lineHeight: '45px',
+            lineHeight: '4rem',
           },
         },
         '.heading-h2': {
           fontSize: '3rem',
           fontWeight: '600',
-          lineHeight: '45px',
+          lineHeight: '1.80rem',
 
           '@screen md': {
-            fontSize: '5rem',
+            fontSize: '3.5rem',
             fontWeight: '800',
-            lineHeight: '45px',
+            lineHeight: '4rem',
           },
         },
-        '.para-text': {
-          fontSize: '16px',
+        '.heading-h3': {
+          fontSize: '2rem',
+          fontWeight: '600',
+          lineHeight: '1.80rem',
+
+          '@screen md': {
+            fontSize: '3rem',
+            fontWeight: '800',
+            lineHeight: '1rem',
+          },
+        },
+        '.heading-h4': {
+          fontSize: '1.80rem',
           fontWeight: '500',
-          lineHeight: '27px',
+          lineHeight: '1.80rem',
+
+          '@screen md': {
+            fontSize: '2rem',
+            fontWeight: '500',
+            lineHeight: '2.50rem',
+          },
+        },
+        '.para': {
+          fontSize: '1rem',
+          fontWeight: '500',
+          lineHeight: '1.80rem',
+
+          '@screen md': {
+            fontSize: '1.40rem',
+            fontWeight: '600',
+            lineHeight: '2rem',
+          },
         },
         '.btn': {
           display: 'inline-flex',
           alignItems: 'center',
           justifyContent: 'center',
           fontWeight: '600',
-          padding: '12px 24px',
+          padding: '.90rem 1.90rem',
           borderRadius: '8px',
           transition: 'all 0.3s ease-in-out',
           border: '1px solid transparent',
