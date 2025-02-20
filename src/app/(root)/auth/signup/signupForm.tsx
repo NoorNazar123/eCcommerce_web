@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import SubmitForm from '@/components/SubmitButton';
 import { signUp } from '@/lib/auth';
 import { FormState } from '@/types/type';
+import { formSignupFields } from '@/data/auth.data';
 import { FcGoogle } from 'react-icons/fc';
 import Link from 'next/link';
 
@@ -22,34 +23,6 @@ const SignupForm = () => {
     }
   };
 
-  // Define form fields dynamically
-  const formFields = [
-    {
-      id: 'username',
-      name: 'username',
-      type: 'text',
-      label: 'Username',
-      placeholder: 'Enter your username',
-      errorKey: 'username', // Key for error messages
-    },
-    {
-      id: 'email',
-      name: 'email',
-      type: 'email',
-      label: 'Email Address',
-      placeholder: 'Enter your email',
-      errorKey: 'email', // Key for error messages
-    },
-    {
-      id: 'password',
-      name: 'password',
-      type: 'password',
-      label: 'Password',
-      placeholder: 'Enter your password',
-      errorKey: 'password', // Key for error messages
-    },
-  ];
-
   return (
     <form onSubmit={handleSubmit}>
       {/* Error Message */}
@@ -60,21 +33,29 @@ const SignupForm = () => {
       )}
 
       {/* Dynamically Render Form Fields */}
-      {formFields.map(({ id, name, type, label, placeholder, errorKey }) => (
-        <div key={id} className="py-[8px]">
-          <Label htmlFor={id} className="para font-normal text-[16px]">
-            {label}
-          </Label>
-          <Input id={id} name={name} type={type} placeholder={placeholder} />
-          {/* Render error message if exists */}
-          {state?.error && (
-            <p className="para text-[12px] text-red-500 line-clamp-1">
-              {/* Use type assertion to access error message dynamically */}
-              {state.error[errorKey as keyof typeof state.error]}
-            </p>
-          )}
-        </div>
-      ))}
+      {formSignupFields &&
+        formSignupFields.map(
+          ({ id, name, type, label, placeholder, errorKey }) => (
+            <div key={id} className="py-[8px]">
+              <Label htmlFor={id} className="para font-normal text-[16px]">
+                {label}
+              </Label>
+              <Input
+                id={id}
+                name={name}
+                type={type}
+                placeholder={placeholder}
+              />
+              {/* Render error message if exists */}
+              {state?.error && (
+                <p className="para text-[12px] text-red-500 line-clamp-1">
+                  {/* Use type assertion to access error message dynamically */}
+                  {state.error[errorKey as keyof typeof state.error]}
+                </p>
+              )}
+            </div>
+          ),
+        )}
 
       {/* Submit Button */}
       <SubmitForm>Sign up</SubmitForm>
