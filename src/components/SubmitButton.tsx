@@ -16,7 +16,7 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ children }) => {
     <button
       type="submit"
       disabled={pending}
-      className="w-full btn btn-outline para bg-[#fdebd0] dark:bg-transparent transition rounded-lg shadow-md py-[20px] mt-8"
+      className="w-full btn btn-outline h-[65px] para bg-[#FFD79E] text-[22px] dark:bg-transparent transition rounded-lg shadow-md py-[20px] mt-8"
     >
       {pending ? <Loading size="w-[20px] h-[20px]" /> : children}
     </button>

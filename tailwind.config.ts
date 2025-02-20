@@ -135,13 +135,14 @@ export default {
         '.layout-container': {
           width: '100%',
           margin: '0 auto',
+          padding: '2rem 1rem',
 
           '@screen md': {
             width: '90%',
             maxWidth: '1700px',
             margin: '0 auto',
+            padding: '6rem 1rem',
           },
-          padding: '6rem 1rem',
         },
         '.heading-h1': {
           fontSize: '4rem',
@@ -188,8 +189,8 @@ export default {
           },
         },
         '.para': {
-          fontSize: '1rem',
-          fontWeight: '500',
+          fontSize: '0.80rem',
+          fontWeight: '400',
           lineHeight: '1.80rem',
 
           '@screen md': {
@@ -197,6 +198,11 @@ export default {
             fontWeight: '600',
             lineHeight: '2rem',
           },
+        },
+        '.center-xy': {
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         },
         '.btn': {
           display: 'inline-flex',

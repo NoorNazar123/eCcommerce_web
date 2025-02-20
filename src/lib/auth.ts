@@ -69,16 +69,16 @@ export async function logIn(
   state: FormState,
   formData: FormData,
 ): Promise<FormState> {
-  // Fix: Correct parameter name
+  // Validate form data using Zod schema
   const validationFields = loginFormSchema.safeParse({
     email: formData.get('email'),
     password: formData.get('password'),
   });
 
-  // Fix: Handle validation results properly
+  // Fix 1: Ensure validation failure returns properly formatted error
   if (!validationFields.success) {
     return {
-      error: validationFields.error.flatten().fieldErrors,
+      error: validationFields.error.flatten().fieldErrors, // Ensure front-end can handle this structure
     };
   }
 
@@ -87,25 +87,24 @@ export async function logIn(
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(validationFields.data), // Send validated data
+    body: JSON.stringify(validationFields.data), // Fix 2: Send only validated data
   });
+
   if (response.ok) {
-    //sign done
     const results = await response.json();
 
-    // console.log("Login Response:", results); // ✅ Debugging step
-
+    // Fix 3: Properly handle missing accessToken or refreshToken
     if (!results.accessToken) {
       console.error('Missing access token in response!');
       return {
-        error: { message: 'Authentication failed. No token received.' },
+        error: { message: 'Authentication failed. No access token received.' }, // Fix typo: 'access' token
       };
     }
 
     if (!results.refreshToken) {
-      console.error('Missing access token in response!');
+      console.error('Missing refresh token in response!');
       return {
-        error: { message: 'Authentication failed. No refrsh token received.' },
+        error: { message: 'Authentication failed. No refresh token received.' }, // Fix typo: 'refresh' token
       };
     }
 
@@ -118,14 +117,79 @@ export async function logIn(
       accessToken: results.accessToken,
       refreshToken: results.refreshToken,
     });
-    redirect('/');
+
+    // Fix 4: Ensure redirect is returned to stop function execution
+    return redirect('/');
   } else {
     return {
+      // Fix 5: Typo correction: 'Invaled' → 'Invalid'
       message:
-        response.status === 401 ? 'Invaled Password' : response.statusText,
+        response.status === 401 ? 'Invalid Password' : response.statusText,
     };
   }
 }
+
+// export async function logIn(
+//   state: FormState,
+//   formData: FormData,
+// ): Promise<FormState> {
+//   // Fix: Correct parameter name
+//   const validationFields = loginFormSchema.safeParse({
+//     email: formData.get('email'),
+//     password: formData.get('password'),
+//   });
+
+//   // Fix: Handle validation results properly
+//   if (!validationFields.success) {
+//     return {
+//       error: validationFields.error.flatten().fieldErrors,
+//     };
+//   }
+
+//   const response = await fetch(`http://localhost:8080/auth/login`, {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(validationFields.data), // Send validated data
+//   });
+//   if (response.ok) {
+//     //sign done
+//     const results = await response.json();
+
+//     // console.log("Login Response:", results); // ✅ Debugging step
+
+//     if (!results.accessToken) {
+//       console.error('Missing access token in response!');
+//       return {
+//         error: { message: 'Authentication failed. No token received.' },
+//       };
+//     }
+
+//     if (!results.refreshToken) {
+//       console.error('Missing access token in response!');
+//       return {
+//         error: { message: 'Authentication failed. No refrsh token received.' },
+//       };
+//     }
+
+//     await createSession({
+//       user: {
+//         id: results.id,
+//         username: results.username,
+//         role: results.role,
+//       },
+//       accessToken: results.accessToken,
+//       refreshToken: results.refreshToken,
+//     });
+//     redirect('/');
+//   } else {
+//     return {
+//       message:
+//         response.status === 401 ? 'Invaled Password' : response.statusText,
+//     };
+//   }
+// }
 
 export const refreshToken = async (oldRefreshToken: string) => {
   const session = await getSession();

@@ -16,7 +16,7 @@ const SignInButton = async () => {
         </Link>
         <Link
           href="/auth/signup"
-          className="btn btn-outline transition rounded-lg shadow-md"
+          className="btn btn-outline transition rounded-lg shadow-md bg-[#FFD79E] dark:bg-transparent"
         >
           Signup
         </Link>
@@ -32,7 +32,7 @@ const SignInButton = async () => {
       </div>
 
       <form action="/api/auth/signout" method="GET">
-        <Button type="submit" className="btn btn-danger ">
+        <Button type="submit" className="btn btn-danger">
           Logout
         </Button>
       </form>

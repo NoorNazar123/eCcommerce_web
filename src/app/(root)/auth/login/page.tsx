@@ -1,7 +1,11 @@
 import AuthForm from '@/components/AuthForm';
 
 export default function Login() {
-  return <AuthForm type="login" />;
+  return (
+    <div className="min-h-[90vh]">
+      <AuthForm type="login" />
+    </div>
+  );
 }
 
 // import Link from 'next/link';

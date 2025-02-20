@@ -34,7 +34,6 @@ export type FormState =
         message?: string;
       };
       message?: string;
-      null: null;
     }
   | undefined;
 

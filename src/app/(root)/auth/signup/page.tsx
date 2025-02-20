@@ -1,7 +1,11 @@
 import AuthForm from '@/components/AuthForm';
 
 export default function Signup() {
-  return <AuthForm type="signup" />;
+  return (
+    <div className="min-h-[90vh]">
+      <AuthForm type="signup" />
+    </div>
+  );
 }
 
 // 'use client';

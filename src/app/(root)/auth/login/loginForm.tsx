@@ -47,7 +47,7 @@ const LoginForm = () => {
     <form onSubmit={handleSubmit}>
       {/* Error Message */}
       {state?.error?.message && (
-        <p className="para bg-red-500 text-white px-2 rounded">
+        <p className="para text-[12px] text-red-500 line-clamp-1">
           {state.error.message}
         </p>
       )}
@@ -67,7 +67,7 @@ const LoginForm = () => {
           />
           {/* Render error message if exists */}
           {state?.error && (
-            <p className="para text-red-500">
+            <p className="para text-[12px] text-red-500 line-clamp-1">
               {state.error[errorKey as keyof typeof state.error]}
             </p>
           )}
@@ -82,7 +82,9 @@ const LoginForm = () => {
       </div>
 
       {/* Submit Button */}
-      <SubmitForm>Log In</SubmitForm>
+      <div>
+        <SubmitForm>Log in</SubmitForm>
+      </div>
     </form>
   );
 };

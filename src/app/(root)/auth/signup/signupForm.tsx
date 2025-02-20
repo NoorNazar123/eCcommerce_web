@@ -54,7 +54,7 @@ const SignupForm = () => {
     <form onSubmit={handleSubmit}>
       {/* Error Message */}
       {state?.error?.message && (
-        <p className="para bg-red-500 text-white px-2  rounded">
+        <p className="para text-[15px] bg-red-500 text-white px-2  rounded">
           {state.error.message}
         </p>
       )}
@@ -65,16 +65,10 @@ const SignupForm = () => {
           <Label htmlFor={id} className="para font-normal text-[16px]">
             {label}
           </Label>
-          <Input
-            id={id}
-            name={name}
-            type={type}
-            placeholder={placeholder}
-            className=""
-          />
+          <Input id={id} name={name} type={type} placeholder={placeholder} />
           {/* Render error message if exists */}
           {state?.error && (
-            <p className="para text-red-500">
+            <p className="para text-[12px] text-red-500 line-clamp-1">
               {/* Use type assertion to access error message dynamically */}
               {state.error[errorKey as keyof typeof state.error]}
             </p>
@@ -83,7 +77,7 @@ const SignupForm = () => {
       ))}
 
       {/* Submit Button */}
-      <SubmitForm>Sign Up</SubmitForm>
+      <SubmitForm>Sign up</SubmitForm>
     </form>
   );
 };
