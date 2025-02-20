@@ -7,10 +7,13 @@ import SubmitForm from '@/components/SubmitButton';
 import { logIn } from '@/lib/auth';
 import { FormState } from '@/types/type';
 import Link from 'next/link';
-import { formLoinFields } from '@/data/auth.data';
+import { formLoginFields } from '@/data/auth.data';
+import { Eye, EyeOff } from 'lucide-react';
 
 const LoginForm = () => {
   const [state, setState] = useState<FormState | undefined>(undefined);
+
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -35,20 +38,35 @@ const LoginForm = () => {
       )}
 
       {/* Dynamically Render Form Fields */}
-      {formLoinFields &&
-        formLoinFields.map(
+      {formLoginFields &&
+        formLoginFields.map(
           ({ id, name, type, label, placeholder, errorKey }) => (
-            <div key={id} className="py-[8px]">
+            <div key={id} className="py-[8px] relative">
               <Label htmlFor={id} className="para font-normal text-[16px]">
                 {label}
               </Label>
               <Input
                 id={id}
                 name={name}
-                type={type}
                 placeholder={placeholder}
-                className=""
+                type={
+                  name === 'password'
+                    ? passwordVisible
+                      ? 'text'
+                      : 'password'
+                    : type
+                }
               />
+              {/* Eye Icon */}
+              {name === 'password' && (
+                <button
+                  type="button"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 mt-4 text-gray-500"
+                  onClick={() => setPasswordVisible(!passwordVisible)}
+                >
+                  {passwordVisible ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              )}
               {/* Render error message if exists */}
               {state?.error && (
                 <p className="para text-[12px] text-red-500 line-clamp-1">

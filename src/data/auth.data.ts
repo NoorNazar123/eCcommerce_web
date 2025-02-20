@@ -1,4 +1,4 @@
-export const formLoinFields = [
+export const formLoginFields = [
   {
     id: 'email',
     name: 'email',
