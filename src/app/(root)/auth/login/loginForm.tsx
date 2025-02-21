@@ -35,9 +35,15 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      {/* ✅ Show Success Message */}
+      {state?.success && (
+        <p className="para text-green-500 px-3 py-2 rounded mt-2">
+          {state.success}
+        </p>
+      )}
       {/* Error Message */}
       {state?.error?.message && (
-        <p className="para text-[12px] text-red-500 line-clamp-1 text-center">
+        <p className="para text-[14px] text-red-500 line-clamp-1 text-center">
           {state.error.message}
         </p>
       )}

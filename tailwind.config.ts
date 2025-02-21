@@ -194,8 +194,8 @@ export default {
           lineHeight: '1.80rem',
 
           '@screen md': {
-            fontSize: '1.40rem',
-            fontWeight: '600',
+            fontSize: '1rem',
+            fontWeight: '500',
             lineHeight: '2rem',
           },
         },

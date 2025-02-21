@@ -47,9 +47,12 @@ export async function signUp(
         },
       };
     }
-
-    // Redirect on success
-    redirect('/auth/login');
+    return {
+      success:
+        '✅ Signup successful! Please check your email to verify your account.',
+    };
+    // // Redirect on success
+    // redirect('/auth/login');
   } catch (error) {
     // Check if the error is a redirect error
     if (error instanceof Error && error.message.includes('NEXT_REDIRECT')) {
@@ -121,12 +124,11 @@ export async function logIn(
     // Fix 4: Ensure redirect is returned to stop function execution
     return redirect('/');
   } else {
+    const errorData = await response.json();
     return {
-      // Fix 5: Typo correction: 'Invaled' → 'Invalid'
-      message:
-        response.status === 401
-          ? `Invalid password or email ${response.statusText.toString()}`
-          : response.statusText,
+      error: {
+        message: errorData.message || 'An error occurred during login.',
+      },
     };
   }
 }
