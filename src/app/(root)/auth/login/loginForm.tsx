@@ -22,9 +22,14 @@ const LoginForm = () => {
 
     // Call logIn without the first argument (or pass undefined if required)
     const result = await logIn(undefined, formData);
-
+    console.log('result123', result);
     if (result) {
-      setState(result);
+      setState({
+        error: {
+          message:
+            result.message || result.error?.message || 'An error occurred.',
+        },
+      });
     }
   };
 
@@ -32,7 +37,7 @@ const LoginForm = () => {
     <form onSubmit={handleSubmit}>
       {/* Error Message */}
       {state?.error?.message && (
-        <p className="para text-[12px] text-red-500 line-clamp-1">
+        <p className="para text-[12px] text-red-500 line-clamp-1 text-center">
           {state.error.message}
         </p>
       )}

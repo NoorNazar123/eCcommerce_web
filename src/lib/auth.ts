@@ -124,7 +124,9 @@ export async function logIn(
     return {
       // Fix 5: Typo correction: 'Invaled' → 'Invalid'
       message:
-        response.status === 401 ? 'Invalid Password' : response.statusText,
+        response.status === 401
+          ? `Invalid password or email ${response.statusText.toString()}`
+          : response.statusText,
     };
   }
 }
