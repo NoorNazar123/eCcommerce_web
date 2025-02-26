@@ -65,7 +65,7 @@ export async function getSession(): Promise<Session | null> {
     const { payload } = await jwtVerify(cookie, encodedKey, {
       algorithms: ['HS256'],
     });
-    console.log('Verified payload:', cookie); // Debug: Log the verified payload
+    // console.log('Verified payload:', cookie); // Debug: Log the verified payload
 
     // Validate payload structure
     if (payload && typeof payload === 'object' && 'user' in payload) {

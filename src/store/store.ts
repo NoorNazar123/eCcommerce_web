@@ -1,9 +1,32 @@
+// import { configureStore } from '@reduxjs/toolkit';
+// import cartReducer from './features/card/cardSlice';
+// import productSlice from './features/product/productSlice'
+
+// export const makeStore = () => {
+//   return configureStore({
+//     reducer: cartReducer,
+//     reducer: car
+//   });
+// };
+
+// // Infer the type of makeStore
+// export type AppStore = ReturnType<typeof makeStore>;
+// // Infer the `RootState` and `AppDispatch` types from the store itself
+// export type RootState = ReturnType<AppStore['getState']>;
+// export type AppDispatch = AppStore['dispatch'];
 import { configureStore } from '@reduxjs/toolkit';
 import cartReducer from './features/card/cardSlice';
+import productReducer from './features/product/productSlice';
+
+// Combine reducers to avoid overwriting
+const rootReducer = {
+  cart: cartReducer,
+  product: productReducer,
+};
 
 export const makeStore = () => {
   return configureStore({
-    reducer: cartReducer,
+    reducer: rootReducer,
   });
 };
 
