@@ -1,7 +1,12 @@
+import ProductCard from '@/components/custom/ProductCard';
 import React from 'react';
 
-const ProductPage = () => {
-  return <div>ProductPage</div>;
+const productsPages = () => {
+  return (
+    <div>
+      <ProductCard />
+    </div>
+  );
 };
 
-export default ProductPage;
+export default productsPages;

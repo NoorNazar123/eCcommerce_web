@@ -22,50 +22,48 @@ passtportjs and JWT Authentication – User Authentication
 Swagger – API Documentation
 Docker – Containerization for
 
-📁 Folder Structure
-
 📦 src/
 │── 📂 app/ # Next.js App Router (Page-Based Routing)
 │ ├── 📂 dashboard/ # Admin Dashboard (Manage Orders, Products, Users)
-│ │ ├── index.tsx # Dashboard Overview (Admin Home)
-│ │ ├── orders.tsx # Manage Orders (View, Edit Orders)
-│ │ ├── products.tsx # Manage Products (CRUD Operations on Products)
-│ │ ├── users.tsx # Manage Users (User Profiles, Permissions)
-│ │ ├── reports.tsx # View Sales Reports, Analytics
+│ │ ├── page.tsx # Dashboard Overview (Admin Home) (Updated for Next.js 15)
+│ │ ├── orders/page.tsx # Manage Orders (View, Edit Orders)
+│ │ ├── products/page.tsx # Manage Products (CRUD Operations on Products)
+│ │ ├── users/page.tsx # Manage Users (User Profiles, Permissions)
+│ │ ├── reports/page.tsx # View Sales Reports, Analytics
 │ ├── 📂 root/ # User-Facing Pages (Auth, Products, Profile, Cart, Checkout)
 │ │ ├── 📂 auth/ # Authentication Pages (Login, Signup, Forgot Password)
-│ │ │ ├── login.tsx # Login page
-│ │ │ ├── signup.tsx # Signup page
-│ │ │ ├── forgot.tsx # Forgot Password page
-|\_\_ verfity.tsx #verfied real user
+│ │ │ ├── login/page.tsx # Login page
+│ │ │ ├── signup/page.tsx # Signup page
+│ │ │ ├── forgot/page.tsx # Forgot Password page
+│ │ │ ├── verify/page.tsx # Verified Real User (New Page)
 │ │ ├── 📂 products/ # Product Pages (Listing, Details, Categories)
-│ │ │ ├── index.tsx # Product Listing Page (All Products)
-│ │ │ ├── [id].tsx # Dynamic Product Detail Page
-│ │ │ ├── category/[slug].tsx # Product Categories Page (e.g., Electronics, Clothing)
+│ │ │ ├── page.tsx # Product Listing Page (All Products)
+│ │ │ ├── [id]/page.tsx # Dynamic Product Detail Page
+│ │ │ ├── category/[slug]/page.tsx # Product Categories Page (e.g., Electronics, Clothing)
 │ │ ├── 📂 cart/ # Cart Pages (View Cart, Update Quantities)
-│ │ │ ├── index.tsx # Cart Overview Page
-│ │ │ ├── summary.tsx # Cart Summary (Price Breakdown, Apply Coupons)
+│ │ │ ├── page.tsx # Cart Overview Page
+│ │ │ ├── summary/page.tsx # Cart Summary (Price Breakdown, Apply Coupons)
 │ │ ├── 📂 checkout/ # Checkout Pages (Shipping, Payment)
-│ │ │ ├── index.tsx # Checkout page (Shipping details)
-│ │ │ ├── shipping.tsx # Shipping Address Form
-│ │ │ ├── payment.tsx # Payment Gateway Integration
+│ │ │ ├── page.tsx # Checkout page (Shipping details)
+│ │ │ ├── shipping/page.tsx # Shipping Address Form
+│ │ │ ├── payment/page.tsx # Payment Gateway Integration
 │ │ ├── 📂 profile/ # User Profile Pages (View and Edit Profile)
-│ │ │ ├── index.tsx # View Profile (User Information)
-│ │ │ ├── edit.tsx # Edit Profile Information (Name, Email, Password)
+│ │ │ ├── page.tsx # View Profile (User Information)
+│ │ │ ├── edit/page.tsx # Edit Profile Information (Name, Email, Password)
 │ │ ├── 📂 orders/ # User's Order History and Details
-│ │ │ ├── index.tsx # Order History Page (Past Orders)
-│ │ │ ├── [orderId].tsx # Order Details Page
+│ │ │ ├── page.tsx # Order History Page (Past Orders)
+│ │ │ ├── [orderId]/page.tsx # Order Details Page
 │ ├── 📂 api/ # API Routes (Calling NestJS Backend)
 │ │ ├── 📂 auth/ # Authentication API Calls (Login, Signup, Forgot Password)
-│ │ │ ├── login.ts # Login API
-│ │ │ ├── signup.ts # Signup API
-│ │ │ ├── forgot.ts # Forgot Password API
+│ │ │ ├── login/route.ts # Login API
+│ │ │ ├── signup/route.ts # Signup API
+│ │ │ ├── forgot/route.ts # Forgot Password API
 │ │ ├── 📂 products/ # Product API Calls (CRUD for Products)
-│ │ │ ├── index.ts # Fetch Products (Listing) <-- Calls NestJS API to fetch products
-│ │ │ ├── [id].ts # Fetch Product by ID (Dynamic) <-- Calls NestJS API to fetch single product
+│ │ │ ├── route.ts # Fetch Products (Listing) <-- Calls NestJS API to fetch products
+│ │ │ ├── [id]/route.ts # Fetch Product by ID (Dynamic) <-- Calls NestJS API to fetch single product
 │ │ ├── 📂 orders/ # Order API Calls (Place Order, Order History)
-│ │ │ ├── create.ts # Create Order API <-- Interacts with NestJS to place orders
-│ │ │ ├── history.ts # Order History API <-- Fetches user order history from NestJS
+│ │ │ ├── create/route.ts # Create Order API <-- Interacts with NestJS to place orders
+│ │ │ ├── history/route.ts # Order History API <-- Fetches user order history from NestJS
 │ │ ├── 📂 cart/ # Cart API Calls (Add to Cart, Remove from Cart, Update Quantities)
 │ │ ├── 📂 checkout/ # Checkout API (Payment, Shipping, etc.)
 │ │ ├── 📂 payments/ # Payment API (Integrating with Payment Gateways)
