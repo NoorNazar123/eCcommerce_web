@@ -10,7 +10,7 @@ export async function signUp(
   formData: FormData,
 ): Promise<FormState> {
   const validationFields = signupFormSchema.safeParse({
-    name: formData.get('name'),
+    username: formData.get('username'),
     email: formData.get('email'),
     password: formData.get('password'),
   });
@@ -21,7 +21,7 @@ export async function signUp(
     };
   }
 
-  const response = await fetch(`${BACKEND_URL}/auth/signup`, {
+  const response = await fetch(`http://localhost:8080/auth/signup`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ export async function signUp(
     body: JSON.stringify(validationFields.data),
   });
   if (response.ok) {
-    redirect('/auth/signin');
+    redirect('/auth/login');
   } else
     return {
       message:

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useActionState, useState } from 'react';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import SubmitForm from '@/components/SubmitButton';
@@ -9,23 +9,30 @@ import { FormState } from '@/types/type';
 import { formSignupFields } from '@/data/auth.data';
 import { Eye, EyeOff } from 'lucide-react';
 
+const initialState: FormState = { error: {}, success: '' }; // ✅ Initial state
+
 const SignupForm = () => {
-  const [state, setState] = useState<FormState | undefined>(undefined);
+  const [state, formAction] = useActionState<FormState, FormData>(
+    async (state, formData) => {
+      return await signUp(state, formData); // ✅ Fix: Pass `state` & `formData`
+    },
+    initialState,
+  );
 
   const [passwordVisible, setPasswordVisible] = useState(false);
+  //
+  // const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  //   // event.preventDefault();
+  //   // const formData = new FormData(event.currentTarget);
+  //   // const result = await signUp(null, formData);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const result = await signUp(null, formData);
-
-    if (result) {
-      setState(result);
-    }
-  };
+  //   if (result) {
+  //     setState(result);
+  //   }
+  // };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form action={formAction}>
       {/* ✅ Show Success Message */}
       {state?.success && (
         <p className="para text-green-500 px-3 py-2 rounded mt-2">

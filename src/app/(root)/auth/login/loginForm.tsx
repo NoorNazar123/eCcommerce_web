@@ -33,9 +33,9 @@ const LoginForm = () => {
         </p>
       )}
       {/* Error Message */}
-      {state?.error?.message && (
+      {state?.message && (
         <p className="para text-[14px] text-red-500 line-clamp-1 text-center">
-          {state.error.message}
+          {state.message}
         </p>
       )}
 
