@@ -9,6 +9,9 @@ body {
   height: 100%;
   font-family: var(--font-sans); /* Default to Inter */
 }
+.font-logo {
+  font-family: 'Pacifico', cursive;
+}
 
 @layer base {
   :root {

@@ -10,6 +10,13 @@ export const authFetch = async (
   options: FetchOptions = {},
 ) => {
   const session = await getSession();
+  console.log(
+    'session123',
+    session,
+    session?.accessToken,
+    session?.refreshToken,
+    session?.user,
+  );
 
   options.headers = {
     ...options.headers,

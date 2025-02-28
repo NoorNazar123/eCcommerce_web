@@ -25,7 +25,7 @@ export default function ResetPasswordPage() {
       );
 
       setMessage(response.data.message);
-      setTimeout(() => router.push('auth/login'), 3000); // Redirect after success
+      setTimeout(() => router.push('/auth/login'), 3000); // Redirect after success
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         setMessage(error.response?.data?.message || 'Something went wrong');

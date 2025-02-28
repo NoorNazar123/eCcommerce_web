@@ -1,7 +1,6 @@
 // src/lib/ApiClient.ts
 import axios, { AxiosInstance } from 'axios';
 import { Product, ProductFormData } from '@/types/product.type';
-import { ApiResponse, ApiError } from '@/types/api.type';
 import { handleApiError } from '@/utils/errorHandler';
 import { BACKEND_URI } from '@/constants/constants';
 

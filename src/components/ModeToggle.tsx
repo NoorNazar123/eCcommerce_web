@@ -24,7 +24,12 @@ export function ModeToggle() {
   };
 
   return (
-    <Button onClick={toggleTheme} variant="outline" size="icon">
+    <Button
+      onClick={toggleTheme}
+      // variant="outline"
+      size="icon"
+      className="p-[19px] text-gray-800 dark:text-white hover:bg-transparent hover:text-[#FFD79E] dark:hover:text-gray-300"
+    >
       {theme === 'dark' ? (
         <Sun className="h-5 w-5 transition-all" />
       ) : (

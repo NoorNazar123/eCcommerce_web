@@ -58,7 +58,7 @@ export async function getSession(): Promise<Session | null> {
   try {
     // Get session cookie
     const cookie = (await cookies()).get('session')?.value;
-    // console.log('Session cookie:', cookie) // Debug: Log the cookie value
+    console.log('Session cookie:', cookie); // Debug: Log the cookie value
     if (!cookie) return null;
 
     // Verify JWT

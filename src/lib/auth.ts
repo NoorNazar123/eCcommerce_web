@@ -97,14 +97,14 @@ export async function logIn(
     const results = await response.json();
 
     // Fix 3: Properly handle missing accessToken or refreshToken
-    if (!results.accessToken) {
+    if (!results.data.accessToken) {
       console.error('Missing access token in response!');
       return {
         error: { message: 'Authentication failed. No access token received.' }, // Fix typo: 'access' token
       };
     }
 
-    if (!results.refreshToken) {
+    if (!results.data.refreshToken) {
       console.error('Missing refresh token in response!');
       return {
         error: { message: 'Authentication failed. No refresh token received.' }, // Fix typo: 'refresh' token

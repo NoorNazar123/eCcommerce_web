@@ -1,6 +1,6 @@
 const DemoStyle = () => {
   return (
-    <div className="layout-container bg-[#c525255e] text-center">
+    <div className="layout-container  text-center">
       <h1 className="mb-10 heading-h2 mx-auto">eCommerce buid</h1>
       <div className="  text-primary bg-decent-foreground ">
         <h1 className="heading-h1 leading-[70px] mb-10">Hello, Tailwind!</h1>

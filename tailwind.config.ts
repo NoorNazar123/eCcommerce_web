@@ -139,7 +139,7 @@ export default {
 
           '@screen md': {
             width: '90%',
-            maxWidth: '1700px',
+            maxWidth: '1800px',
             margin: '0 auto',
             padding: '6rem 1rem',
           },
@@ -209,7 +209,7 @@ export default {
           alignItems: 'center',
           justifyContent: 'center',
           fontWeight: '600',
-          padding: '.90rem 1.90rem',
+          padding: '0.8rem 1.5rem',
           borderRadius: '8px',
           transition: 'all 0.3s ease-in-out',
           border: '1px solid transparent',
