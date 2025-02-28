@@ -4,37 +4,28 @@ import React, { useState } from 'react';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import SubmitForm from '@/components/SubmitButton';
-import { logIn } from '@/lib/auth';
+import { login } from '@/lib/auth';
 import { FormState } from '@/types/type';
 import Link from 'next/link';
 import { formLoginFields } from '@/data/auth.data';
 import { Eye, EyeOff } from 'lucide-react';
+import { useActionState } from 'react'; // ✅ Import useActionState
+
+const initialState: FormState = { error: {}, success: '' }; // ✅ Initial state added
 
 const LoginForm = () => {
-  const [state, setState] = useState<FormState | undefined>(undefined);
+  // ✅ Fix: useActionState expects (state, formData) format
+  const [state, formAction] = useActionState<FormState, FormData>(
+    async (state, formData) => {
+      return await login(state, formData); // ✅ Fix: Pass `state` & `formData`
+    },
+    initialState,
+  );
 
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const formData = new FormData(event.currentTarget);
-
-    // Call logIn without the first argument (or pass undefined if required)
-    const result = await logIn(undefined, formData);
-    console.log('result123', result);
-    if (result) {
-      setState({
-        error: {
-          message:
-            result.message || result.error?.message || 'An error occurred.',
-        },
-      });
-    }
-  };
-
   return (
-    <form onSubmit={handleSubmit}>
+    <form action={formAction}>
       {/* ✅ Show Success Message */}
       {state?.success && (
         <p className="para text-green-500 px-3 py-2 rounded mt-2">
@@ -49,44 +40,35 @@ const LoginForm = () => {
       )}
 
       {/* Dynamically Render Form Fields */}
-      {formLoginFields &&
-        formLoginFields.map(
-          ({ id, name, type, label, placeholder, errorKey }) => (
-            <div key={id} className="py-[8px] relative">
-              <Label htmlFor={id} className="para font-normal text-[16px]">
-                {label}
-              </Label>
-              <Input
-                id={id}
-                name={name}
-                placeholder={placeholder}
-                type={
-                  name === 'password'
-                    ? passwordVisible
-                      ? 'text'
-                      : 'password'
-                    : type
-                }
-              />
-              {/* Eye Icon */}
-              {name === 'password' && (
-                <button
-                  type="button"
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 mt-4 text-gray-500"
-                  onClick={() => setPasswordVisible(!passwordVisible)}
-                >
-                  {passwordVisible ? <EyeOff size={20} /> : <Eye size={20} />}
-                </button>
-              )}
-              {/* Render error message if exists */}
-              {state?.error && (
-                <p className="para text-[12px] text-red-500 line-clamp-1">
-                  {state.error[errorKey as keyof typeof state.error]}
-                </p>
-              )}
-            </div>
-          ),
-        )}
+      {formLoginFields.map(({ id, name, type, label, placeholder }) => (
+        <div key={id} className="py-[8px] relative">
+          <Label htmlFor={id} className="para font-normal text-[16px]">
+            {label}
+          </Label>
+          <Input
+            id={id}
+            name={name}
+            placeholder={placeholder}
+            type={
+              name === 'password'
+                ? passwordVisible
+                  ? 'text'
+                  : 'password'
+                : type
+            }
+          />
+          {/* Eye Icon for Password */}
+          {name === 'password' && (
+            <button
+              type="button"
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 mt-4 text-gray-500"
+              onClick={() => setPasswordVisible(!passwordVisible)}
+            >
+              {passwordVisible ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
+          )}
+        </div>
+      ))}
 
       {/* Forgot Password Link */}
       <div className="text-right mt-1">
@@ -107,6 +89,116 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+
+// 'use client';
+
+// import React, { useState } from 'react';
+// import { Label } from '@/components/ui/label';
+// import { Input } from '@/components/ui/input';
+// import SubmitForm from '@/components/SubmitButton';
+// import { login } from '@/lib/auth';
+// import { FormState } from '@/types/type';
+// import Link from 'next/link';
+// import { formLoginFields } from '@/data/auth.data';
+// import { Eye, EyeOff } from 'lucide-react';
+
+// const LoginForm = () => {
+//   const [state, setState] = useState<FormState | undefined>(undefined);
+
+//   const [passwordVisible, setPasswordVisible] = useState(false);
+
+//   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+//     event.preventDefault();
+
+//     const formData = new FormData(event.currentTarget);
+
+//     // Call logIn without the first argument (or pass undefined if required)
+//     const result = await login(undefined, formData);
+//     console.log('result123', result);
+//     if (result) {
+//       setState({
+//         error: {
+//           message:
+//             result.message || result.error?.message || 'An error occurred.',
+//         },
+//       });
+//     }
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       {/* ✅ Show Success Message */}
+//       {state?.success && (
+//         <p className="para text-green-500 px-3 py-2 rounded mt-2">
+//           {state.success}
+//         </p>
+//       )}
+//       {/* Error Message */}
+//       {state?.error?.message && (
+//         <p className="para text-[14px] text-red-500 line-clamp-1 text-center">
+//           {state.error.message}
+//         </p>
+//       )}
+
+//       {/* Dynamically Render Form Fields */}
+//       {formLoginFields &&
+//         formLoginFields.map(
+//           ({ id, name, type, label, placeholder, errorKey }) => (
+//             <div key={id} className="py-[8px] relative">
+//               <Label htmlFor={id} className="para font-normal text-[16px]">
+//                 {label}
+//               </Label>
+//               <Input
+//                 id={id}
+//                 name={name}
+//                 placeholder={placeholder}
+//                 type={
+//                   name === 'password'
+//                     ? passwordVisible
+//                       ? 'text'
+//                       : 'password'
+//                     : type
+//                 }
+//               />
+//               {/* Eye Icon */}
+//               {name === 'password' && (
+//                 <button
+//                   type="button"
+//                   className="absolute right-3 top-1/2 transform -translate-y-1/2 mt-4 text-gray-500"
+//                   onClick={() => setPasswordVisible(!passwordVisible)}
+//                 >
+//                   {passwordVisible ? <EyeOff size={20} /> : <Eye size={20} />}
+//                 </button>
+//               )}
+//               {/* Render error message if exists */}
+//               {state?.error && (
+//                 <p className="para text-[12px] text-red-500 line-clamp-1">
+//                   {state.error[errorKey as keyof typeof state.error]}
+//                 </p>
+//               )}
+//             </div>
+//           ),
+//         )}
+
+//       {/* Forgot Password Link */}
+//       <div className="text-right mt-1">
+//         <Link
+//           href="/auth/forgot-password"
+//           className="para text-[15px] hover:underline"
+//         >
+//           Forgot password?
+//         </Link>
+//       </div>
+
+//       {/* Submit Button */}
+//       <div>
+//         <SubmitForm>Log in</SubmitForm>
+//       </div>
+//     </form>
+//   );
+// };
+
+// export default LoginForm;
 
 // 'use client';
 

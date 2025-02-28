@@ -1,11 +1,7 @@
 import { getSession } from '@/lib/session';
 import Link from 'next/link';
-import { Button } from './ui/button';
 import { FaRegUserCircle } from 'react-icons/fa';
-
-import { RiLogoutCircleRLine } from 'react-icons/ri';
 import LogoutButton from './LogoutButton';
-import { ModeToggle } from './ModeToggle';
 
 const SignInButton = async () => {
   const session = await getSession();
