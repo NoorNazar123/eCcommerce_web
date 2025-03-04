@@ -19,7 +19,7 @@ const LogoutButton = () => {
       {/* Logout Button */}
       <Button
         onClick={() => setShowModal(true)}
-        className="btn btn-outline px-3 text-gray-800 dark:text-[#fff] hover:bg-[#FEB47B]"
+        className="btn btn-outline px-3 py-[22px] text-gray-800 dark:text-[#fff] hover:bg-[#FEB47B]"
       >
         <RiLogoutCircleRLine className="mr-1" />
         <span className="hidden sm:inline">Logout</span>
