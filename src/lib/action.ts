@@ -1,12 +1,12 @@
-"use server";
+'use server';
 
-import { authFetch } from "./authFetch";
+import { authFetch } from './authFetch';
 
 export const getProfile = async () => {
   const response = await authFetch(`http://localhost:8080/auth/protected`);
 
   const result = await response.json();
-  console.log("Profile API Response:", result); // ✅ Debugging step
+  console.log('Profile API Response:✅', result);
   return result;
 };
 // export const getProfile = async () => {
