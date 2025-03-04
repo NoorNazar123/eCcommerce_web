@@ -52,3 +52,13 @@ export enum Role {
   EDITOR = 'EDITOR',
   USER = 'USER',
 }
+
+export type Session = {
+  user: {
+    id: string;
+    username: string;
+    role?: Role;
+  };
+  accessToken: string;
+  refreshToken: string;
+};

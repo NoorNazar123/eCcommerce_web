@@ -3,18 +3,8 @@
 import { jwtVerify, SignJWT } from 'jose';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { Role } from '@/types/type';
 import { IncomingMessage, ServerResponse } from 'http';
-
-export type Session = {
-  user: {
-    id: string;
-    username: string;
-    role: Role;
-  };
-  accessToken: string;
-  refreshToken: string;
-};
+import { Session } from '@/types/type';
 
 const secretKey = process.env.SESSION_SECRET_KEY!;
 const encodedKey = new TextEncoder().encode(secretKey);
@@ -74,78 +64,3 @@ export async function getSession(
 export async function deleteSession() {
   (await cookies()).delete('session');
 }
-
-// export async function updateTokens({
-//   accessToken,
-//   refreshToken,
-// }: {
-//   accessToken: string;
-//   refreshToken: string;
-// }) {
-//   const cookie = (await cookies()).get('session')?.value;
-
-//   console.log('cookie🔥', cookie);
-
-//   if (!cookie) return null;
-
-//   const { payload } = await jwtVerify<Session>(cookie, encodedKey);
-
-//   if (!payload) throw new Error('Session not found');
-
-//   const newPayload: Session = {
-//     user: {
-//       ...payload.user,
-//     },
-//     accessToken,
-//     refreshToken,
-//   };
-
-//   await createSession(newPayload);
-// }
-
-// export async function updateTokens({
-//   accessToken,
-//   refreshToken,
-// }: {
-//   accessToken: string;
-//   refreshToken: string;
-// }) {
-//   console.log('acess:🔥', accessToken, 'ref:🔥', refreshToken);
-
-//   // const cookie = (await cookies()).get('session')?.value;
-//   const cookieStore = await cookies();
-//   const cookie = cookieStore.get('session');
-
-//   console.log('Fetching session cookie for update:🔥', cookie);
-
-//   if (!cookie) {
-//     console.error('Session cookie not found');
-//     throw new Error('Session cookie not found');
-//   }
-
-//   try {
-//     const { payload } = await jwtVerify<Session>(cookie, encodedKey);
-//     console.log('Decoded session payload for update:', payload);
-
-//     if (!payload) {
-//       console.error('Invalid session payload');
-//       throw new Error('Invalid session payload');
-//     }
-
-//     const newPayload: Session = {
-//       user: {
-//         ...payload.user,
-//       },
-//       accessToken,
-//       refreshToken,
-//     };
-
-//     console.log('Updating session with new payload:', newPayload);
-//     await createSession(newPayload);
-
-//     console.log('Tokens updated successfully');
-//   } catch (err) {
-//     console.error('Failed to update tokens:', err);
-//     throw new Error('Failed to update tokens');
-//   }
-// }
