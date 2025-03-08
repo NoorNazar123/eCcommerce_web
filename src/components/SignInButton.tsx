@@ -27,6 +27,7 @@ const SignInButton = async () => {
 
   return (
     <div className="center-xy gap-3">
+    
       {/* <ModeToggle /> */}
       {session.user?.username && session.user.username.trim().length > 0 ? (
         <div className="w-12 h-12 p-[1.1rem] center-xy text-[1.2rem] shadow-md border border-gray-300 dark:border-gray-600 rounded-full text-gray-800 dark:text-[#fff] hover:bg-[#FEB47B] dark:bg-transparent dark:hover:bg-[#1f2937] cursor-pointer">

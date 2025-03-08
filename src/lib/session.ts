@@ -22,8 +22,8 @@ export async function createSession(
     .setExpirationTime('7d')
     .sign(encodedKey);
 
-  console.log('Creating session with payload:', payload);
-  console.log('Session token:', session);
+  // console.log('Creating session with payload:', payload);
+  // console.log('Session token:', session);
   const cookieStore = await cookies();
 
   cookieStore.set('session', session, {
@@ -41,7 +41,7 @@ export async function getSession(
   req?: IncomingMessage & { cookies: Partial<{ [key: string]: string }> },
 ) {
   const cookie = (await cookies()).get('session')?.value;
-  console.log('Fetching session cookie:🔥', cookie);
+  // console.log('Fetching session cookie:🔥', cookie);
 
   if (!cookie) {
     console.log('No session cookie found');
@@ -53,7 +53,7 @@ export async function getSession(
       algorithms: ['HS256'],
     });
 
-    console.log('Decoded session payload:', payload);
+    // console.log('Decoded session payload:', payload);
     return payload as Session;
   } catch (err) {
     console.error('Failed to verify the session:', err);
@@ -64,3 +64,5 @@ export async function getSession(
 export async function deleteSession() {
   (await cookies()).delete('session');
 }
+
+export type { Session };

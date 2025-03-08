@@ -68,3 +68,21 @@ body {
     --chart-5: 340 75% 55%;
   }
 }
+/* Scrollbar width & color */
+textarea::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+textarea::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Track color */
+  border-radius: 10px; /* Rounded corners */
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background: #888; /* Scrollbar color */
+  border-radius: 10px;
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Hover effect */
+}

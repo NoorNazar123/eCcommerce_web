@@ -64,20 +64,9 @@ export async function login(
 
   if (response.ok) {
     const result = await response.json();
-    // console.log('result123', result);
+    console.log('result123', result);
 
     const { data, statusCode } = result;
-
-    // console.log('data123', data.id);
-    // console.log(
-    //   'loginATRT123',
-    //   'ref',
-    //   data.refreshToken,
-    //   'aceess',
-    //   data.accessToken,
-    // );
-
-    // TODO: Create The Session For Authenticated User.
 
     await createSession({
       user: {
@@ -90,15 +79,81 @@ export async function login(
     });
     redirect('/');
   } else {
+    const error = await response.json();
+    console.log('B ERR:', error);
+
     return {
       message:
-        response.status === 401 ? 'Invalid Credentials!' : response.statusText,
+        error.message ||
+        'Invalid credentials or user not found. Please ensure you have registered and verified your account.',
     };
   }
 }
 
+// export async function login(
+//   state: FormState,
+//   formData: FormData,
+// ): Promise<FormState> {
+//   // Validate the form data
+//   const validatedFields = loginFormSchema.safeParse({
+//     email: formData.get('email'),
+//     password: formData.get('password'),
+//   });
+
+//   // If validation fails, return the validation errors
+//   if (!validatedFields.success) {
+//     return {
+//       error: validatedFields.error.flatten().fieldErrors,
+//     };
+//   }
+
+//   try {
+//     // Send a POST request to the backend
+//     const response = await fetch(`http://localhost:8080/auth/login`, {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify(validatedFields.data),
+//     });
+
+//     // If the response is OK, handle the success case
+//     if (response.ok) {
+//       const result = await response.json();
+//       console.log('result123', result);
+
+//       const { data, statusCode } = result;
+
+//       await createSession({
+//         user: {
+//           id: data.id,
+//           username: data.username,
+//           role: data.role,
+//         },
+//         accessToken: data.accessToken,
+//         refreshToken: data.refreshToken,
+//       });
+
+//       // Redirect to the home page
+//       redirect('/');
+//     } else {
+//       // If the response is not OK, handle the error case
+//       const errorResponse = await response.json();
+//       return {
+//         message: errorResponse.message || 'An error occurred during login.',
+//       };
+//     }
+//   } catch (error) {
+//     // Handle any unexpected errors
+//     console.error('Login error:', error);
+//     return {
+//       message: 'An unexpected error occurred. Please try again later.',
+//     };
+//   }
+// }
+
 export const refreshToken = async (oldRefreshToken: string) => {
-  console.log('oldReftoken🔥', oldRefreshToken);
+  // console.log('oldReftoken🔥', oldRefreshToken);
 
   try {
     // Step 1: Call the backend to refresh the token
@@ -121,7 +176,7 @@ export const refreshToken = async (oldRefreshToken: string) => {
 
     // Parse the response body as JSON
     const data = await response.json();
-    console.log('Response from backend:', data);
+    // console.log('Response from backend:', data);
 
     // Extract the new tokens from the `data` object
     const { accessToken, refreshToken } = data.data as {
@@ -134,8 +189,8 @@ export const refreshToken = async (oldRefreshToken: string) => {
       throw new Error('Tokens not found in the response');
     }
 
-    console.log('New Access Token:🔥', accessToken);
-    console.log('New Refresh Token:🔥', refreshToken);
+    // console.log('New Access Token:🔥', accessToken);
+    // console.log('New Refresh Token:🔥', refreshToken);
 
     // Return the new tokens as an object
     return { accessToken, refreshToken };

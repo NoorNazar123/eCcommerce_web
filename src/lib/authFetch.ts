@@ -17,14 +17,14 @@ export const authFetch = async (
   };
 
   let response = await fetch(url, options);
-  console.log('res:8#?', response);
+  // console.log('res:8#?', response);
 
   if (response.status === 401) {
     if (!session?.refreshToken) throw new Error('refresh token not found!');
 
     // Call the refreshToken function to get new tokens
     const newTokens = await refreshToken(session.refreshToken);
-    console.log('🔄 New tokens:', newTokens);
+    // console.log('🔄 New tokens:', newTokens);
 
     if (newTokens) {
       // Update the session with new tokens
@@ -36,7 +36,7 @@ export const authFetch = async (
 
       // Create a new session cookie
       await createSession(newSession);
-      console.log('🍪 Session cookie updated successfully!');
+      // console.log('🍪 Session cookie updated successfully!');
 
       // Update the headers with the new access token
       options.headers.Authorization = `Bearer ${newTokens.accessToken}`;

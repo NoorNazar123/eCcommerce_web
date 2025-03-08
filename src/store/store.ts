@@ -17,11 +17,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import cartReducer from './features/card/cardSlice';
 import productReducer from './features/product/productSlice';
+import postReducer from './features/post/postsSlice';
 
 // Combine reducers to avoid overwriting
 const rootReducer = {
   cart: cartReducer,
   product: productReducer,
+  posts: postReducer,
 };
 
 export const makeStore = () => {
